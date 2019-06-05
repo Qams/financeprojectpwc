@@ -1,0 +1,41 @@
+sudo service zookeeper stop
+bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/kafka-server-start.sh config/server-0.properties
+bin/kafka-server-start.sh config/server-1.properties
+	bin/kafka-server-start.sh config/server-2.properties
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 7 --topic activity-topic
+
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 7 --topic exchange-rate
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 7 --topic fin-transaction
+bin/kafka-topics.sh --describe     --topic activity-topic  --zookeeper localhost:2181
+
+Topic:activity-topic	PartitionCount:7	ReplicationFactor:3	Configs:
+	Topic: activity-topic	Partition: 0	Leader: 0	Replicas: 0,2,1Isr: 0,2,1
+	Topic: activity-topic	Partition: 1	Leader: 1	Replicas: 1,0,2Isr: 1,0,2
+	Topic: activity-topic	Partition: 2	Leader: 2	Replicas: 2,1,0Isr: 2,1,0
+	Topic: activity-topic	Partition: 3	Leader: 0	Replicas: 0,1,2Isr: 0,1,2
+	Topic: activity-topic	Partition: 4	Leader: 1	Replicas: 1,2,0Isr: 1,2,0
+	Topic: activity-topic	Partition: 5	Leader: 2	Replicas: 2,0,1Isr: 2,0,1
+	Topic: activity-topic	Partition: 6	Leader: 0	Replicas: 0,2,1Isr: 0,2,1
+
+Topic:activity-topic	PartitionCount:7	ReplicationFactor:3	Configs:
+	Topic: activity-topic	Partition: 0	Leader: 0	Replicas: 0,2,1	Isr: 0,1
+	Topic: activity-topic	Partition: 1	Leader: 1	Replicas: 1,0,2	Isr: 1,0
+	Topic: activity-topic	Partition: 2	Leader: 1	Replicas: 2,1,0	Isr: 1,0
+	Topic: activity-topic	Partition: 3	Leader: 0	Replicas: 0,1,2	Isr: 0,1
+	Topic: activity-topic	Partition: 4	Leader: 1	Replicas: 1,2,0	Isr: 1,0
+	Topic: activity-topic	Partition: 5	Leader: 0	Replicas: 2,0,1	Isr: 0,1
+	Topic: activity-topic	Partition: 6	Leader: 0	Replicas: 0,2,1	Isr: 0,1
+
+Run Hadoop:
+cd sbin
+./hadoop-daemon.sh start namenode
+./hadoop-daemon.sh start datanode
+./yarn-daemon.sh start resourcemanager
+./yarn-daemon.sh start nodemanager
+./mr-jobhistory-daemon.sh start historyserver
+jps
+
+Apache Flume
+./flume-ng agent -n flume1 -c conf -f example.conf -Dflume.root.logger=INFO,console
+./flume-ng agent -n flume2 -c conf -f transaction.conf -Dflume.root.logger=INFO,console
