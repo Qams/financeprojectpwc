@@ -1,0 +1,68 @@
+<div>
+  <h2>Transactions historic stats</h2>
+  <mat-form-field class="pickerSpace rightMargin">
+    <input matInput [min]="minDate" [max]="maxDate" [(ngModel)]="statsDate" [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="example-full-width rightMargin">
+    <mat-select [(value)]="typeOfStats">
+      <mat-option value="operationNumber">Operation number</mat-option>
+      <mat-option value="transactionValue">Transaction value</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="findStats()" type="submit" class="button-width example-full-width rightMargin">Find historic stats</button>
+  <div *ngIf="incomeData.length > 0 || outcomeData.length > 0">
+    <div>
+      <div>
+        <canvas baseChart
+                [datasets]="radarChartData"
+                [options]="radarChartOptions"
+                [labels]="radarChartLabels"
+                [chartType]="radarChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <h2>Transactions real time stats</h2>
+  <mat-form-field class="example-full-width rightMargin">
+    <mat-select [(value)]="realTimeCurrency">
+      <mat-option value="EUR">EUR</mat-option>
+      <mat-option value="USD">USD</mat-option>
+      <mat-option value="GBP">GBP</mat-option>
+      <mat-option value="CHF">CHF</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="findRealTimeStats()" type="submit" class="button-width example-full-width rightMargin">Find real-time stats</button>
+
+  <div *ngIf="showStats">
+    <div>
+      <h3>Number of transactions</h3>
+      <div style="display: block">
+        <canvas baseChart height="100"
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+        </canvas>
+      </div>
+
+      <h3>Total amount of transactions</h3>
+      <div style="display: block">
+        <canvas baseChart height="100"
+                [datasets]="barChartData1"
+                [labels]="barChartLabels1"
+                [options]="barChartOptions"
+                [legend]="barChartLegend1"
+                [chartType]="barChartType1">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

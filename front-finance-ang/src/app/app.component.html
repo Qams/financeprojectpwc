@@ -1,0 +1,53 @@
+<mat-toolbar class="mat-elevation-z3" color="primary">
+  <button mat-button routerLink="/dashboard">
+    <!--<mat-icon>question_answer</mat-icon>-->
+    Finance app
+  </button>
+
+  <button mat-button *ngIf="apiService.isLoggedIn()" routerLink="/realtime-exchange">
+    Real Time Exchange
+  </button>
+
+  <button mat-button *ngIf="apiService.isLoggedIn()" routerLink="/historic-exchange">
+    Exchange Rate Stats
+  </button>
+
+  <button mat-button *ngIf="apiService.isLoggedIn()" routerLink="/transfer">
+    Transfer
+  </button>
+
+  <!--<button mat-button *ngIf="apiService.isLoggedIn()" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{account: 'empty'}">Accounts</button>-->
+  <!--<mat-menu #menu="matMenu">-->
+    <!--<ng-template matMenuContent let-name="account">-->
+      <!--<button mat-menu-item *ngFor="let account of getAccountsNumbers()">{{account}}</button>-->
+    <!--</ng-template>-->
+  <!--</mat-menu>-->
+
+  <button mat-button *ngIf="apiService.isLoggedIn() && apiService.getRole() == 'admin'" routerLink="/paysim">
+    Paysim
+  </button>
+
+  <button mat-button *ngIf="apiService.isLoggedIn() && apiService.getRole() == 'admin'" routerLink="/transaction-stats">
+    Transaction Stats
+  </button>
+
+  <span class="fill-space"></span>
+
+  <button mat-button *ngIf="apiService.isLoggedIn()" routerLink="/users/{{apiService.userId}}">
+    {{apiService.username}}
+  </button>
+
+  <button mat-button *ngIf="apiService.isLoggedIn()" (click)="logout()">
+    Logout
+  </button>
+</mat-toolbar>
+
+<div class="mat-toolbar-single-row"></div>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<!--<button *ngIf="apiService.isLoggedIn()" matTooltip="Dodaj nowe pytanie" matTooltipPosition="left" mat-fab class="fab-button" routerLink="/questionnaire/add">-->
+  <!--<mat-icon>add</mat-icon>-->
+<!--</button>-->

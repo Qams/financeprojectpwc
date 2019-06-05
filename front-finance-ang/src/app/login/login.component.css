@@ -1,0 +1,24 @@
+.full-width {
+  width: 100%;
+}
+
+.login-box {
+  width: 50%;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.login-spinner {
+  padding: 2rem 0 2rem 0;
+  width: 100%;
+  display: none;
+  justify-content: center;
+}
+
+.breakfiller {
+  width: 100%;
+  height: 1rem;
+}

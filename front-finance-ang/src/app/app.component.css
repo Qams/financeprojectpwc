@@ -1,0 +1,21 @@
+.container {
+  max-width: 1250px;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+mat-toolbar {
+  position: fixed;
+  margin: 0 auto;
+  z-index: 999;
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
+
+.fab-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}

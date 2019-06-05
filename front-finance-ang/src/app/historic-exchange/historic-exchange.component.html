@@ -1,0 +1,103 @@
+<h3>Historic exchange rate stats</h3>
+
+<mat-form-field class="pickerSpace">
+  <input matInput [min]="minDate" [max]="maxDate" [(ngModel)]="statsDate" [matDatepicker]="picker" placeholder="Choose a date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="findStats()" type="submit" class="button-width example-full-width">Find exchange rate stats</button>
+
+<div *ngIf="stats.length > 0">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="exchange">
+      <th mat-header-cell *matHeaderCellDef> Exchange </th>
+      <td mat-cell *matCellDef="let element">
+        <b>{{element.exchange}}</b>
+      </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="maxbid">
+      <th mat-header-cell *matHeaderCellDef> Max Bid </th>
+      <td mat-cell *matCellDef="let element">
+        <p>{{element.maxbid}}</p>
+        <p>{{element.maxbiddate | date: 'hh:mm:ss:ms'}}</p>
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="minbid">
+      <th mat-header-cell *matHeaderCellDef> Min Bid </th>
+      <td mat-cell *matCellDef="let element">
+        <p>{{element.minbid}}</p>
+        <p>{{element.minbiddate | date: 'hh:mm:ss:ms'}}</p>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="maxask">
+      <th mat-header-cell *matHeaderCellDef> Max Ask </th>
+      <td mat-cell *matCellDef="let element">
+        <p>{{element.maxask}}</p>
+        <p>{{element.maxaskdate | date: 'hh:mm:ss:ms'}}</p>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="minask">
+      <th mat-header-cell *matHeaderCellDef> Min Ask </th>
+      <td mat-cell *matCellDef="let element">
+        <p>{{element.minask}}</p>
+        <p>{{element.minaskdate | date: 'hh:mm:ss:ms'}}</p>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="changes">
+      <th mat-header-cell *matHeaderCellDef> Changes </th>
+      <td mat-cell *matCellDef="let element"> {{element.changes}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="open">
+      <th mat-header-cell *matHeaderCellDef> Open </th>
+      <td mat-cell *matCellDef="let element">
+        <p>Ask: {{element.openAsk}}</p>
+        <p>Bid: {{element.openBid}}</p>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="close">
+      <th mat-header-cell *matHeaderCellDef> Close </th>
+      <td mat-cell *matCellDef="let element">
+        <p>Ask: {{element.closeAsk}}</p>
+        <p>Bid: {{element.closeBid}}</p>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+
+  <div>
+    <div>
+      <div style="display: block">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
+

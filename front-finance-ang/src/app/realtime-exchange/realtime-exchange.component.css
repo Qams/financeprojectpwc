@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.exchangeGrowth {
+  color: green;
+}
+
+.exchangeFall {
+  color: red;
+}
+
+p {
+  font-size: 16px;
+}

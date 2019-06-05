@@ -1,0 +1,27 @@
+<h1>Finance App</h1>
+<br><br>
+
+<mat-card class="login-box">
+  <form class="login-form" (ngSubmit)="tryToLogin(login.value, password.value)" ngNativeValidate>
+    <mat-form-field class="full-width">
+      <input matInput required placeholder="Login" #login>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput required placeholder="Password" type="password" #password>
+    </mat-form-field>
+
+    <button type="submit" mat-flat-button color="primary" class="full-width">
+      Sign in
+    </button>
+
+    <div class="breakfiller"></div>
+
+    <button id="reg" mat-button color="primary" class="full-width" type="button" (click)="tryToRegister(login.value, password.value)">
+      Register
+    </button>
+  </form>
+  <div class="login-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</mat-card>

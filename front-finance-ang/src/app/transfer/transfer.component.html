@@ -1,0 +1,99 @@
+<div class="transfer-center">
+  <ng-form>
+    <mat-form-field class="example-full-width">
+      <input matInput type="text" placeholder="Receiver" name="receiver" id="receiver" [formControl]="receiverFormControl" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="receiverFormControl.hasError('required')">
+        Receiver is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="text" placeholder="Account number" name="toAccount" id="toAccount" [formControl]="toAccountFormControl" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="toAccountFormControl.hasError('required')">
+        Account number is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="toAccountFormControl.hasError('maxlength') && !toAccountFormControl.hasError('required')">
+        Account number is too long. Maximum 26 characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <textarea matInput type="text" placeholder="Title" name="title" id="title" [formControl]="titleFormControl" [errorStateMatcher]="matcher"></textarea>
+      <mat-error *ngIf="titleFormControl.hasError('required')">
+        Title is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="number" placeholder="Amount" name="amount" id="amount" [formControl]="amountFormControl" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="amountFormControl.hasError('required')">
+        Amount is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="amountFormControl.hasError('min')">
+        Amount must be greater or equals zero
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-select [(value)]="currency">
+        <mat-option value="EUR">EUR</mat-option>
+        <mat-option value="USD">USD</mat-option>
+        <mat-option value="GBP">GBP</mat-option>
+        <mat-option value="CHF">CHF</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--<mat-form-field class="example-full-width">-->
+      <!--<input matInput type="number" placeholder="Number of" name="numberOf" id="numberOf" [formControl]="numberOfFormControl" [errorStateMatcher]="matcher">-->
+      <!--<mat-error *ngIf="numberOfFormControl.hasError('required')">-->
+        <!--Number of is <strong>required</strong>-->
+      <!--</mat-error>-->
+      <!--<mat-error *ngIf="numberOfFormControl.hasError('min')">-->
+        <!--Number of must be greater or equals zero-->
+      <!--</mat-error>-->
+    <!--</mat-form-field>-->
+
+    <!--<mat-form-field class="example-full-width">-->
+      <!--<input matInput type="number" placeholder="Price ($)" name="price" id="price" [formControl]="priceFormControl" [errorStateMatcher]="matcher">-->
+      <!--<mat-error *ngIf="priceFormControl.hasError('required')">-->
+        <!--Price is <strong>required</strong>-->
+      <!--</mat-error>-->
+      <!--<mat-error *ngIf="priceFormControl.hasError('min')">-->
+        <!--Price must be greater or equals zero-->
+      <!--</mat-error>-->
+    <!--</mat-form-field>-->
+
+    <!--<mat-form-field class="example-full-width">-->
+      <!--<textarea matInput type="text" placeholder="Description" name="description" id="description" [formControl]="descriptionFormControl" [errorStateMatcher]="matcher"></textarea>-->
+      <!--<mat-error *ngIf="descriptionFormControl.hasError('required')">-->
+        <!--Description is <strong>required</strong>-->
+      <!--</mat-error>-->
+    <!--</mat-form-field>-->
+
+    <!--<mat-form-field class="example-full-width">-->
+      <!--<textarea matInput type="text" placeholder="Long description" name="longDescription" id="longDescription" [formControl]="longDescriptionFormControl" [errorStateMatcher]="matcher"></textarea>-->
+      <!--<mat-error *ngIf="longDescriptionFormControl.hasError('required')">-->
+        <!--Long description is <strong>required</strong>-->
+      <!--</mat-error>-->
+    <!--</mat-form-field>-->
+
+    <!--<mat-form-field class="example-full-width">-->
+      <!--<input matInput type="text" placeholder="Fot url" name="fotUrl" id="fotUrl" [formControl]="fotUrlFormControl" [errorStateMatcher]="matcher">-->
+      <!--<mat-error *ngIf="fotUrlFormControl.hasError('required')">-->
+        <!--Foto url is <strong>required</strong>-->
+      <!--</mat-error>-->
+    <!--</mat-form-field>-->
+
+
+    <!--<mat-form-field class="example-full-width">-->
+      <!--<mat-select [(value)]="category">-->
+        <!--<mat-option value="baking">baking</mat-option>-->
+        <!--<mat-option value="fruits">fruits</mat-option>-->
+        <!--<mat-option value="dairy">dairy</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+    <div>
+      <button mat-raised-button color="primary" (click)="transfer()" type="submit" class="button-width example-full-width">Send</button>
+    </div>
+  </ng-form>
+</div>

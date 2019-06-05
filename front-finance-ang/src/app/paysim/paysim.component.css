@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+}
+
+.crucial {
+  color: red;
+}
+
+.danger {
+  color: orange;
+}
+
+.warning {
+  color: #FEDF00;
+}

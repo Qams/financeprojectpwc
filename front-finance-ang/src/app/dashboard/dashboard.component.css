@@ -1,0 +1,36 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.grid-item {
+  display: inline-grid;
+  padding: 1rem;
+}
+
+.minusAmount {
+  color: red;
+}
+
+.bigfont {
+  font-size: 20px;
+}
+
+.example-card {
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.avatarSpace {
+  margin-right: 10px;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}

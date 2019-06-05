@@ -1,0 +1,38 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <ngx-avatar mat-card-avatar name="{{apiService.getFirstName()}} {{apiService.getSurname()}}" class="avatarSpace"></ngx-avatar>
+    <mat-card-title>{{apiService.getFirstName()}} {{apiService.getSurname()}}</mat-card-title>
+    <mat-card-subtitle>{{apiService.getCurrentAccountNumber() | iban}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Total account balance: <span class="bigfont">{{accountBalance | number : '1.2-2'}} {{apiService.getCurrentAccount().currency}}</span>
+    </p>
+  </mat-card-content>
+</mat-card>
+
+
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel *ngFor="let t of transactions | paginate: { itemsPerPage: 10, currentPage: pageNum }">
+    <mat-expansion-panel-header class="right-aligned-header">
+      <mat-panel-title [class.minusAmount]="t.ftamount < 0" class="bigfont">
+        {{t.ftamount | number : '1.2-2'}} {{apiService.getCurrentAccountCurrency()}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{t.fttimestamp | date:'medium'}} - {{t.title}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="grid-container">
+      <div class="grid-item">
+        <p><b>From:</b> {{t.sender}} ({{t.fromaccount | iban}})</p>
+        <p><b>To:</b> {{t.receiver}} ({{t.toaccount | iban}})</p>
+      </div>
+      <div class="grid-item">
+        <p><b>Type:</b> {{t.type}}</p>
+        <p><b>Original currency:</b> {{t.fromcurrency}}</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+<pagination-controls (pageChange)="pageNum = $event"></pagination-controls>
+
